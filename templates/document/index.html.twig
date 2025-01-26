@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document index
+{% endblock %}
+
+{% block body %}
+	<h1>Documents</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Original name</th>
+				<th>Original size</th>
+				<th>Resize name</th>
+				<th>Resize size</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for document in documents %}
+				<tr>
+					<td>{{ document.id }}</td>
+					<td>
+						<a href="{{ asset('uploads/' ~ document.originalName) }}">{{ document.originalName }}</a>
+					</td>
+					<td>{{ document.originalSize }}</td>
+					<td>
+						<a href="{{ asset('uploads/' ~ document.newName) }}">{{ document.newName }}</a>
+					</td>
+					<td>{{ document.newSize }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_document_new') }}">Create new</a>
+{% endblock %}
